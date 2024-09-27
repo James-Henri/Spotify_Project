@@ -1,0 +1,8 @@
+@font-face{
+    font-family: "FinalFantasy";
+    src: url(finalf.ttf);
+}
+    
+h1{
+    font-family: "FinalFantasy";
+}
