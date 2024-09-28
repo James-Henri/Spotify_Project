@@ -1,6 +1,6 @@
 @font-face{
     font-family: "FinalFantasy";
-    src: url(finalf.ttf);
+    src: url('/static/finalf.ttf') format("truetype");
 }
     
 h1{
