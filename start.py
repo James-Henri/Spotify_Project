@@ -27,8 +27,9 @@ def response():
 
 
 def create_spotify_oauth():
+    print(os.getenv("api_secret"))
     return SpotifyOAuth(
-        client_id="dda07a58df584d4cad1aed5d3d056dae",
+        client_id="266db9561eef4aeda001535943a08fc0",
         client_secret= os.getenv("api_secret"),
         redirect_uri=url_for('response', _external=True),
         scope="user-library-read"
