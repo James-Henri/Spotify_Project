@@ -1,8 +1,47 @@
 @font-face{
-    font-family: "FinalFantasy";
-    src: url('/static/finalf.ttf') format("truetype");
+    font-family: "FinalFantasy_logo";
+    src: url('/static/OPTIENgeEtienne.otf') format("truetype");
+}
+
+@font-face{
+    font-family: "FinalFantasy_pixel";
+    src: url('/static/Reactor7.otf') format("truetype");
 }
     
-h1{
-    font-family: "FinalFantasy";
+body{
+    font-family: "FinalFantasy_logo";
+    background-color: black;
+}
+
+.front_page_text{
+    font-size: 150px;
+    color: black;
+    text-shadow: 
+    -1px -1px 0 white,
+    1px -1px 0 white,
+    -1px 1px 0 white,
+    1px 1px 0 white;
+}
+
+.spotify_button{
+    font-family: FinalFantasy_pixel;
+    font-size: 25px;
+    color: white;
+    background: radial-gradient(circle at -180px 0px ,#0053ad 100px,#001b85 350px,#000223);
+    border: 2px solid;
+    border-radius: 15px;
+    border-color: white;
+    height: 80px;
+    width: 300px;
+}
+
+.website_logo {
+    text-align: center;
+    margin-top: 100px; 
+    margin-bottom: 20px; 
+}
+
+.button_container {
+    text-align: center;
+    margin-top: 5px;
 }

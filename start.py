@@ -3,34 +3,63 @@ from dotenv import load_dotenv
 import os
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
+import time
 
 app = Flask(__name__)
 
 app.secret_key = "PleaseChange"
 app.config['SESSION_COOKIE_NAME'] = 'Users Cookie'
+TOKEN_INFO = "token_info"
 
-def configure():    #configure will get the secret API Keys
+def configure():    # configure will get the secret API Keys
     load_dotenv()
 
 @app.route("/", methods = ['GET', 'POST'])
 def main_menu():
-    configure()         #must call configure in main section to make sure we can retrieve secret key
-    if request.method == "POST":
+    configure()         # must call configure in main section to make sure we can retrieve secret key
+    if request.method == "POST":    # will be invoked when user clicks the spotify login button
         sp_oauth = create_spotify_oauth()
         auth_url = sp_oauth.get_authorize_url()
         return redirect(auth_url)
-    return render_template("main.html")
+    return render_template("main.html") # main page layout
 
-@app.route("/response", methods = ['GET', 'POST'])
+@app.route("/response", methods = ['GET', 'POST'])  # after loggin in, while be redirected to response
 def response():
-    return render_template("response.html")
+    sp_oauth = create_spotify_oauth()   # needed to 
+    session.clear()     # clearing to ensure that any previous data related to the session is removed before setting new data
+    code = request.args.get("code")     # After user logs into spotify, spotify gives us a special code that will be used to to exchange for an access token
+    token_info = sp_oauth.get_access_token(code)    # exchanging the code for the access token   
+    session[TOKEN_INFO] = token_info    # storing the access token into memory
+    return redirect("/menu")
 
+@app.route("/menu")
+def menu():
+    try:
+        token_info = get_token()    # Checking to see if there is currently an access token in session
+    except:
+        print("user not logged in") # If not, then user is not logged in currently
+        redirect("/")
+
+    sp = spotipy.Spotify(auth=token_info['access_token'])   # This will retrieve all the information
+    result = sp.current_user_top_artists(limit = 20, time_range='long_term')
+    return render_template("menu.html", artists=result['items'])
+
+def get_token():
+    token_info = session.get(TOKEN_INFO, None)
+    if not token_info:
+        raise "exception"
+    now = int(time.time())
+    expired = token_info["expires_at"] - now < 60
+
+    if(expired):
+        sp_oauth = create_spotify_oauth()
+        token_info = sp_oauth.refresh_access_token(token_info['refresh_token'])
+    return token_info
 
 def create_spotify_oauth():
-    print(os.getenv("api_secret"))
     return SpotifyOAuth(
-        client_id="266db9561eef4aeda001535943a08fc0",
+        client_id="266db9561eef4aeda001535943a08fc0",   #client id and secret from Spotify Developers
         client_secret= os.getenv("api_secret"),
-        redirect_uri=url_for('response', _external=True),
-        scope="user-library-read"
+        redirect_uri=url_for('response', _external=True),   #where to redirect to after authorization
+        scope="user-top-read"   #what information we will be retrieving
     )
