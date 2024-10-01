@@ -6,17 +6,10 @@
     </head>
 
     <body>
-        <h1>Your Top Artists</h1>
-        <ul>
-            {% for artist in artists %}
-                <li>
-                    <h2>{{ artist.name }}</h2>
-                    <img src="{{ artist.images[0].url }}" alt="{{ artist.name }}" width="200">
-                    <p>Genres: {{ artist.genres | join(', ') }}</p>
-                    <p>Popularity: {{ artist.popularity }}</p>
-                    <a href="{{ artist.external_urls.spotify }}" target="_blank">Listen on Spotify</a>
-                </li>
-            {% endfor %}
-        </ul>
+        <div class="select_menu">
+            <p class="option_text">Select an option</p>
+            <button class="select_button">Top Artists</button>
+            <button class="select_button">Top Songs</button>
+        </div>
     </body>
 </html>

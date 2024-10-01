@@ -23,15 +23,47 @@ body{
     1px 1px 0 white;
 }
 
-.spotify_button{
+.main_menu_background_image{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 740px;
+    height: 500px; 
+    background-image: url("final_fantasy_start_screen.png");
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center; 
+}
+
+.new_game_button{
     font-family: FinalFantasy_pixel;
-    font-size: 25px;
+    font-size: 30px;
     color: white;
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+    padding-left: 300px;
+    padding-top: 160px;
+}
+
+.new_game_button:hover{
+    cursor: pointer;
+}
+
+.select_menu{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    margin-top: 15px;
     background: radial-gradient(circle at -180px 0px ,#0053ad 100px,#001b85 350px,#000223);
     border: 2px solid;
     border-radius: 15px;
     border-color: white;
-    height: 80px;
+    height: 500px;
     width: 300px;
 }
 
@@ -45,3 +77,23 @@ body{
     text-align: center;
     margin-top: 5px;
 }
+
+.option_text{
+    font-family: FinalFantasy_pixel;
+
+}
+
+.select_button{
+    font-family: FinalFantasy_pixel;
+    color: white;
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+    font-size: 20px;
+}
+
+.select_button:hover{
+    cursor: pointer;
+}
+
