@@ -2,14 +2,24 @@
 <html>
     <head>
         <title>Main Page</title>
-        <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}" />
     </head>
 
     <body>
+        <div id="start_overlay" class="overlay">
+            <p class="start_text">Click anywhere to start</p>
+        </div>
+
         <div class="main_menu_background_image">
             <form action="/" method="POST">
                 <button class="new_game_button">NEW GAME</button>
+                <img id="new_game_arrow" src="{{ url_for('static',filename='resources/arrow_select.png') }}" class="hidden_arrow">
+                <audio id="select_sound" src="{{ url_for('static',filename='resources/FF7CursorMove.mp3') }}"></audio>
             </form>
         </div>
+
+        <script src="{{ url_for('static',filename='js/main.js') }}"></script>
     </body>
 </html>

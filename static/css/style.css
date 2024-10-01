@@ -1,11 +1,11 @@
 @font-face{
     font-family: "FinalFantasy_logo";
-    src: url('/static/OPTIENgeEtienne.otf') format("truetype");
+    src: url('/static/resources/OPTIENgeEtienne.otf') format("truetype");
 }
 
 @font-face{
     font-family: "FinalFantasy_pixel";
-    src: url('/static/Reactor7.otf') format("truetype");
+    src: url('/static/resources/Reactor7.otf') format("truetype");
 }
     
 body{
@@ -23,17 +23,61 @@ body{
     1px 1px 0 white;
 }
 
-.main_menu_background_image{
+.overlay {
+    font-family: FinalFantasy_pixel;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    opacity: 1;
+    z-index: 1000;
+}
+
+.hidden {
+    display: none;
+}
+
+.main_menu_background_image {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 740px;
     height: 500px; 
-    background-image: url("final_fantasy_start_screen.png");
+    background-image: url("../resources/final_fantasy_start_screen.png");
     background-size: cover; 
     background-repeat: no-repeat; 
     background-position: center; 
+    opacity: 0; /* Start hidden */
+    transition: opacity 3s ease; /* Fade-in effect */
+}
+
+.visible {
+    opacity: 1; /* Show main menu */
+}
+
+/* Hidden arrow visibility */
+.hidden_arrow {
+    visibility: hidden;
+}
+
+/* Full black screen style */
+.black_screen {
+    background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    z-index: 999; /* Ensure it covers everything */
 }
 
 .new_game_button{
@@ -42,14 +86,21 @@ body{
     color: white;
     background:none;
     border:none;
-    margin:0;
-    padding:0;
-    padding-left: 300px;
-    padding-top: 160px;
+    position: relative;
+    left: 300px; 
+    top: 160px;
 }
 
 .new_game_button:hover{
     cursor: pointer;
+}
+
+.hidden_arrow{
+    position: absolute;
+    left: 245px;
+    top: 165px;
+    height: 30px;
+    visibility: hidden;
 }
 
 .select_menu{
