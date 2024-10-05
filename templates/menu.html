@@ -2,14 +2,43 @@
 <html>
     <head>
         <title>Main Page</title>
-        <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}" />
     </head>
 
     <body>
-        <div class="select_menu">
-            <p class="option_text">Select an option</p>
-            <button class="select_button">Top Artists</button>
-            <button class="select_button">Top Songs</button>
+        <div class="character_menu">
+            <audio id="select_sound" src="{{ url_for('static',filename='resources/FF7CursorMove.mp3') }}"></audio>
+            {% for artist in artists %}
+            <article id="firstCharacter">
+				<figure class = "photoContainer"><img id = "firstPosition" class="photo" src="{{ artist.image }}"></figure>
+				<table class = "statsTable">
+					<tr>
+						<td COLSPAN="3" class ="artistName">{{ artist.name }}</td>
+				</table>
+
+			</article>
+
+            {% endfor %}
+            
         </div>
+        
+        <aside id="aside">
+			<ul id="select_menu">
+                <li number="0">
+                    <a href="{{ url_for('menu', page=next_page) }}">Next</a>
+                </li>
+				<li number="1">
+                    <a href="{{ url_for('menu', page=previous_page) }}">Back</a>
+                </li>
+				<li number ="2">Long Term</li>
+				<li number ="3">Medium Term</li>
+				<li number ="4">Short Term</li>
+				<li number ="5">Order</li>
+				<li number ="6">Limit</li>
+				<li number ="7">Config</li>
+				<li number ="8" id = "phs"><br></li>
+				<li number ="9" id = "save">Save</li>
+				<li number ="10">Quit</li>
+			</ul>
     </body>
 </html>

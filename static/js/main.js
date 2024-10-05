@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Wait for the fade-out transition to finish (1 second), then show the main menu
             setTimeout(function() {
+                menu_sound.play()
                 blackScreen.remove(); // Remove the black screen element from the DOM
                 startOverlay.classList.add("hidden"); // Hide the overlay
                 mainMenu.classList.add("visible"); // Show the main menu
@@ -31,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const newGameButton = document.querySelector(".new_game_button");
         const arrow = document.getElementById("new_game_arrow");
         const select_sound = document.getElementById("select_sound");
+        const menu_sound = document.getElementById("mainmenu_sound");
 
         newGameButton.addEventListener("mouseover", function() {
             arrow.style.visibility = "visible"; 

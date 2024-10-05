@@ -41,8 +41,27 @@ def menu():
         redirect("/")
 
     sp = spotipy.Spotify(auth=token_info['access_token'])   # This will retrieve all the information
-    result = sp.current_user_top_artists(limit = 20, time_range='long_term')
-    return render_template("menu.html", artists=result['items'])
+    all_artists = sp.current_user_top_artists(limit=20, time_range='long_term')['items']
+
+    page = request.args.get('page', 1, type=int)
+    per_page = 3
+    start = (page - 1) * per_page
+    end = start + per_page
+    artists = all_artists[start:end]
+
+    artists = []
+    for artist in all_artists[start:end]:
+        # Extract the artist name and image URL (use the first image in the list)
+        artist_data = {
+            'name': artist['name'],
+            'image': artist['images'][0]['url'] if artist['images'] else None  # Ensure there's an image
+        }
+        artists.append(artist_data)
+
+    next_page = page + 1 if len(all_artists) > end else None
+    previous_page = page - 1 if page > 1 else None
+
+    return render_template("menu.html", artists=artists, next_page=next_page, previous_page=previous_page)
 
 def get_token():
     token_info = session.get(TOKEN_INFO, None)

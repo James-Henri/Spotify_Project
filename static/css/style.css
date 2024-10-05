@@ -103,21 +103,6 @@ body{
     visibility: hidden;
 }
 
-.select_menu{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 10px;
-    margin-top: 15px;
-    background: radial-gradient(circle at -180px 0px ,#0053ad 100px,#001b85 350px,#000223);
-    border: 2px solid;
-    border-radius: 15px;
-    border-color: white;
-    height: 500px;
-    width: 300px;
-}
-
 .website_logo {
     text-align: center;
     margin-top: 100px; 
@@ -131,7 +116,80 @@ body{
 
 .option_text{
     font-family: FinalFantasy_pixel;
+    color: white;
+    font-size: 30px;
 
+}
+
+.character_menu{
+    position: absolute;
+    margin: 35px 0px 0px 100px;
+    background: radial-gradient(circle at -180px 0px ,#0053ad 100px,#001b85 350px,#000223);
+    border: 5px solid;
+    border-radius: 15px;
+    box-sizing: border-box;
+    border-color: white;
+    width: 800px;
+    height: 630px;
+}
+
+#aside{
+	position: absolute;
+	margin: 0px 0px 0px 830px;
+	z-index: 3;	
+}
+
+#select_menu{
+	position: absolute;
+	padding: 10px 0px 10px 40px;
+	width: 250px;
+	list-style: none;
+	background: radial-gradient(circle at -180px 0px,#0053ad 100px,#001b85 350px,#000223);
+	border: 5px solid;
+	border-radius: 15px;
+	box-sizing: border-box;   
+    font-family: FinalFantasy_pixel;
+    font-size: 29px;
+    color: white;    	  
+}
+
+#firstCharacter{
+	position: relative;
+	margin: 27px 0px 0px 60px;
+}
+
+#secondCharacter, #thirdCharacter{
+	position: relative;
+	margin: 32px 0px 0px 60px;
+}
+
+.photoContainer{
+	display: inline-block;	
+	position: relative;
+	width: 187.5px; 
+	height: 145px;
+	overflow: hidden;
+}
+
+.photo{
+	display: inline-block;	
+	width: 125px; 
+	height: 145px;
+}
+
+.statsTable{
+	display: inline-block;
+	position: relative;
+	margin: 0px 0px 0px 15px;
+	border-spacing: 0px 0px;
+	line-height: 30px;
+	border-collapse: collapse;
+}
+
+.artistName{
+	font-size: 29px;
+    font-family: FinalFantasy_pixel;
+    color: white;	
 }
 
 .select_button{
@@ -147,4 +205,6 @@ body{
 .select_button:hover{
     cursor: pointer;
 }
+
+
 
