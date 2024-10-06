@@ -42,6 +42,7 @@ def menu():
 
     sp = spotipy.Spotify(auth=token_info['access_token'])   # This will retrieve all the information
     all_artists = sp.current_user_top_artists(limit=20, time_range='long_term')['items']
+    print(all_artists)
 
     page = request.args.get('page', 1, type=int)
     per_page = 3
@@ -54,9 +55,13 @@ def menu():
         # Extract the artist name and image URL (use the first image in the list)
         artist_data = {
             'name': artist['name'],
-            'image': artist['images'][0]['url'] if artist['images'] else None  # Ensure there's an image
+            'image': artist['images'][0]['url'] if artist['images'] else None,  # Ensure there's an image
+            'popularity' : artist['popularity'],
+            'followers' : artist['followers']['total']
         }
         artists.append(artist_data)
+
+        print(artists)
 
     next_page = page + 1 if len(all_artists) > end else None
     previous_page = page - 1 if page > 1 else None

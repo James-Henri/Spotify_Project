@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Main Page</title>
-        <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/menu.css') }}" />
     </head>
 
     <body>
@@ -12,8 +12,10 @@
             <article id="firstCharacter">
 				<figure class = "photoContainer"><img id = "firstPosition" class="photo" src="{{ artist.image }}"></figure>
 				<table class = "statsTable">
-					<tr>
-						<td COLSPAN="3" class ="artistName">{{ artist.name }}</td>
+					<tr> <td COLSPAN="3" class ="artistName">{{ artist.name }}</td> </tr>
+                    <tr> <td class="level_stats">LV</td> <td class="popularity_stats">{{artist.popularity}}</td> </tr>
+                    <tr> <td class="hp_stats">HP</td> </tr>    
+                    <tr> <td class="mp_stats">MP</td> </tr>    
 				</table>
 
 			</article>
