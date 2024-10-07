@@ -10,13 +10,38 @@
             <audio id="select_sound" src="{{ url_for('static',filename='resources/FF7CursorMove.mp3') }}"></audio>
             {% for artist in artists %}
             <article id="firstCharacter">
-				<figure class = "photoContainer"><img id = "firstPosition" class="photo" src="{{ artist.image }}"></figure>
+				<figure class = "photoContainer">
+                    <img class="photo" src="{{ artist.image }}">
+                </figure>
 				<table class = "statsTable">
-					<tr> <td COLSPAN="3" class ="artistName">{{ artist.name }}</td> </tr>
-                    <tr> <td class="level_stats">LV</td> <td class="popularity_stats">{{artist.popularity}}</td> </tr>
-                    <tr> <td class="hp_stats">HP</td> </tr>    
-                    <tr> <td class="mp_stats">MP</td> </tr>    
+					<tr> 
+                        <td COLSPAN="3" class ="artistName">{{ artist.name }}</td> 
+                    </tr>
+                    <tr> 
+                        <td class="level_stats">LV</td> <td class="popularity_stats">{{artist.popularity}}</td> 
+                    </tr>
+                    <tr> 
+                        <td class="hp_stats">HP <div class="hpBar"></div></td>
+                        <td class="hp_min">500 /</td>
+                        <td class="hp_max">500</td> 
+                    </tr>    
+                    <tr> 
+                        <td class="mp_stats">MP <div class ="mpBar"></div></td> 
+                        <td class ="mp_min">63 /</td>
+						<td class ="mp_max">63</td>
+                    </tr>    
 				</table>
+                <table class="levels_table">
+                    <tr>
+                        <td class="next_level_text">next level <div class="next_level_bar"></div></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="limit_level_text">Limit level &nbsp; 1 <div class="limit_level_bar"></div></td>
+                    </tr>
+                </table>
 
 			</article>
 
@@ -41,6 +66,16 @@
 				<li number ="8" id = "phs"><br></li>
 				<li number ="9" id = "save">Save</li>
 				<li number ="10">Quit</li>
-			</ul>
+            </ul>
+
+            <ul class="current_time">
+                <li>Time <span id ="active_time">0<txt id = "colon">:</txt>00:00</span></li>
+                <li>Gil<span id ="gilAmount">1803</span></li>
+            </ul>
+        </aside>
+
+        <footer class="cur_page"> Sector 7 Slums </footer>
+
+        <script src="{{ url_for('static',filename='js/menu.js') }}"></script>
     </body>
 </html>
