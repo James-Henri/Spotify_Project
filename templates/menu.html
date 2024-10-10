@@ -52,14 +52,14 @@
         <aside id="aside">
 			<ul id="select_menu">
                 <li number="0">
-                    <a href="{{ url_for('menu', page=next_page) }}">Next</a>
+                    <a href="{{ url_for(request.endpoint, page=next_page, time_range=time_range) }}">Next</a>
                 </li>
 				<li number="1">
-                    <a href="{{ url_for('menu', page=previous_page) }}">Back</a>
+                    <a href="{{ url_for(request.endpoint, page=previous_page, time_range=time_range) }}">Back</a>
                 </li>
-				<li number ="2">Long Term</li>
-				<li number ="3">Medium Term</li>
-				<li number ="4">Short Term</li>
+				<li number ="2"><a href="{{ url_for('artist_long_term') }}">Long Term</a></li>
+				<li number ="3"><a href="{{ url_for('artist_medium_term') }}">Medium Term</a></li>
+				<li number ="4"><a href="{{ url_for('artist_short_term') }}">Short Term</a></li>
 				<li number ="5">Order</li>
 				<li number ="6">Limit</li>
 				<li number ="7">Config</li>
@@ -74,7 +74,17 @@
             </ul>
         </aside>
 
-        <footer class="cur_page"> Sector 7 Slums </footer>
+        <footer class="cur_page">
+            {% if time_range == 'long_term' %}
+                Long Term Artists - Page {{ page }}
+            {% elif time_range == 'medium_term' %}
+                Medium Term Artists - Page {{ page }}
+            {% elif time_range == 'short_term' %}
+                Short Term Artists - Page {{ page }}
+            {% else %}
+                Artists - Page {{ page }}
+            {% endif %}
+        </footer>
 
         <script src="{{ url_for('static',filename='js/menu.js') }}"></script>
     </body>

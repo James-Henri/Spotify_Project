@@ -30,40 +30,50 @@ def response():
     code = request.args.get("code")     # After user logs into spotify, spotify gives us a special code that will be used to to exchange for an access token
     token_info = sp_oauth.get_access_token(code)    # exchanging the code for the access token   
     session[TOKEN_INFO] = token_info    # storing the access token into memory
-    return redirect("/menu")
+    return redirect("/artist_long_term")
 
-@app.route("/menu")
-def menu():
+@app.route("/artist_long_term")
+def artist_long_term():
+    return render_top_artists('long_term')
+
+@app.route("/artist_medium_term")
+def artist_medium_term():
+    return render_top_artists('medium_term')
+
+@app.route("/artist_short_term")
+def artist_short_term():
+    return render_top_artists('short_term')
+
+def render_top_artists(time_range): #helper function for long_term, medium_term, short_term
     try:
-        token_info = get_token()    # Checking to see if there is currently an access token in session
+        token_info = get_token()  # Check if the user is logged in
     except:
-        print("user not logged in") # If not, then user is not logged in currently
-        redirect("/")
+        print("User not logged in")
+        return redirect("/")
 
-    sp = spotipy.Spotify(auth=token_info['access_token'])   # This will retrieve all the information
-    all_artists = sp.current_user_top_artists(limit=20, time_range='long_term')['items']
+    sp = spotipy.Spotify(auth=token_info['access_token'])  # Authenticate with Spotify API
+
+    all_artists = sp.current_user_top_artists(limit=20, time_range=time_range)['items']
 
     page = request.args.get('page', 1, type=int)
     per_page = 3
     start = (page - 1) * per_page
     end = start + per_page
-    artists = all_artists[start:end]
-
     artists = []
+
     for artist in all_artists[start:end]:
-        # Extract the artist name and image URL (use the first image in the list)
         artist_data = {
             'name': artist['name'],
-            'image': artist['images'][0]['url'] if artist['images'] else None,  # Ensure there's an image
-            'popularity' : artist['popularity'],
-            'followers' : artist['followers']['total']
+            'image': artist['images'][0]['url'] if artist['images'] else None,
+            'popularity': artist['popularity'],
+            'followers': artist['followers']['total']
         }
         artists.append(artist_data)
 
     next_page = page + 1 if len(all_artists) > end else None
     previous_page = page - 1 if page > 1 else None
 
-    return render_template("menu.html", artists=artists, next_page=next_page, previous_page=previous_page)
+    return render_template("menu.html", artists=artists, next_page=next_page, previous_page=previous_page, page=page, time_range=time_range)
 
 def get_token():
     token_info = session.get(TOKEN_INFO, None)

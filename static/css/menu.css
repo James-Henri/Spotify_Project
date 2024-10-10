@@ -193,7 +193,7 @@ a{
 .current_time{
     position:absolute;
     list-style: none;
-    font-size: 32px;
+    font-size: 32px; 
 	margin: 582px 0px 0px 0px;
 	width: 240px;
 	height: 100px;
