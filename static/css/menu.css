@@ -120,12 +120,22 @@ a{
 	letter-spacing: 0.8px;
 }
 
-.hpBar{
+.hp_bar{
     position:absolute;
 	margin-left: 50px;
     width: 145px;
 	height: 3px;
 	background: linear-gradient(90deg,rgb(46, 137, 255) 60%,rgb(217, 226, 222));
+    z-index: 2;
+}
+
+.hp_bar_empty{
+    position:absolute;
+	margin-left: 50px;
+	height: 3px;
+	width: 145px;
+	background: rgb(53, 2, 2);
+	z-index: 1;
 }
 
 .mp_stats{
@@ -147,12 +157,22 @@ a{
 	letter-spacing: 0.8px;
 }
 
-.mpBar{
+.mp_bar{
 	position:absolute;
 	margin-left: 50px;
     width: 145px;
 	height: 3px;
 	background: linear-gradient(90deg,rgb(20, 226, 123) 60%,rgb(217, 226, 222));
+    z-index: 2;
+}
+
+.mp_bar_empty{
+    position:absolute;
+	margin-left: 50px;
+	height: 3px;
+	width: 145px;
+	background: rgb(53, 2, 2);
+	z-index: 1;
 }
 
 .next_level_text{
@@ -175,6 +195,17 @@ a{
 	height: 13px;
     width: 180px;
 	background: linear-gradient(180deg,rgb(194, 130, 130) 20%,rgb(255, 255, 255) 40%,rgb(255, 170, 170) 60%, rgb(255, 170, 170) 100%);
+    z-index: 2;
+}
+
+.next_level_bar_empty{
+	position:absolute;
+	margin-left: 20px;
+	height: 13px;
+	width: 180px;
+	border: 3px solid;
+	background: linear-gradient(180deg,rgb(46, 46, 46) 20%,rgb(116, 116, 116) 40%,rgb(116, 116, 116) 100%);
+	z-index: 1;
 }
 
 .limit_level_text{
@@ -182,12 +213,24 @@ a{
     top: 40px;
 
 }
+
 .limit_level_bar{
     position:absolute;
 	margin: 3px 0px 0px 23px;
 	height: 13px;
     width: 180px;
 	background: linear-gradient(180deg,rgb(158, 112, 138) 20%,rgb(255, 255, 255) 40%,rgb(229, 164, 201) 60%, rgb(229, 164, 201) 100%);
+    z-index: 2;
+}
+
+.limit_level_bar_empty{
+	position:absolute;
+	margin-left: 20px;
+	height: 13px;
+	width: 180px;
+	border: 3px solid;
+	background: linear-gradient(180deg,rgb(46, 46, 46) 20%,rgb(116, 116, 116) 40%,rgb(116, 116, 116) 100%);
+	z-index: 1;
 }
 
 .current_time{
