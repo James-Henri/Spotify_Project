@@ -63,10 +63,6 @@ body{
     opacity: 1; /* Show main menu */
 }
 
-/* Hidden arrow visibility */
-.hidden_arrow {
-    visibility: hidden;
-}
 
 /* Full black screen style */
 .black_screen {

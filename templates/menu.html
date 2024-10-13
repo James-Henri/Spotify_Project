@@ -6,8 +6,10 @@
     </head>
 
     <body>
+        <audio id="select_sound" src="{{ url_for('static',filename='resources/FF7CursorMove.mp3') }}"></audio>
+
         <div class="character_menu">
-            <audio id="select_sound" src="{{ url_for('static',filename='resources/FF7CursorMove.mp3') }}"></audio>
+
             {% for artist in artists %}
             <article id="firstCharacter">
 				<figure class = "photoContainer">
@@ -22,8 +24,8 @@
                     </tr>
                     <tr> 
                         <td class="hp_stats">HP <div class="hp_bar"></div><div class="hp_bar_empty"></div></td>
-                        <td class="hp_min">500 /</td>
-                        <td class="hp_max">500</td> 
+                        <td class="hp_min" id="hpMin">500 /</td>
+                        <td class="hp_max" id="hpMax">500</td> 
                     </tr>    
                     <tr> 
                         <td class="mp_stats">MP <div class ="mp_bar"></div><div class="mp_bar_empty"></div></td> 
@@ -57,15 +59,31 @@
         
         <aside id="aside">
 			<ul id="select_menu">
-                <li number="0">
+                <li number="0" class="active">
+                    <img src="{{ url_for('static',filename='resources/arrow_select.png') }}" class="select_arrow">
+                    <img src="{{ url_for('static',filename='resources/arrow_select.png') }}" class="select_arrow_shadow">
                     <a href="{{ url_for(request.endpoint, page=next_page, time_range=time_range) }}">Next</a>
                 </li>
 				<li number="1">
+                    <img src="{{ url_for('static',filename='resources/arrow_select.png') }}" class="select_arrow">
+                    <img src="{{ url_for('static',filename='resources/arrow_select.png') }}" class="select_arrow_shadow">
                     <a href="{{ url_for(request.endpoint, page=previous_page, time_range=time_range) }}">Back</a>
                 </li>
-				<li number ="2"><a href="{{ url_for('artist_long_term') }}">Long Term</a></li>
-				<li number ="3"><a href="{{ url_for('artist_medium_term') }}">Medium Term</a></li>
-				<li number ="4"><a href="{{ url_for('artist_short_term') }}">Short Term</a></li>
+				<li number ="2">
+                    <img src="{{ url_for('static',filename='resources/arrow_select.png') }}" class="select_arrow">
+                    <img src="{{ url_for('static',filename='resources/arrow_select.png') }}" class="select_arrow_shadow">
+                    <a href="{{ url_for('artist_long_term') }}">Long Term</a>
+                </li>
+				<li number ="3">
+                    <img src="{{ url_for('static',filename='resources/arrow_select.png') }}" class="select_arrow">
+                    <img src="{{ url_for('static',filename='resources/arrow_select.png') }}" class="select_arrow_shadow">
+                    <a href="{{ url_for('artist_medium_term') }}">Medium Term</a>
+                </li>
+				<li number ="4">
+                    <img src="{{ url_for('static',filename='resources/arrow_select.png') }}" class="select_arrow">
+                    <img src="{{ url_for('static',filename='resources/arrow_select.png') }}" class="select_arrow_shadow">
+                    <a href="{{ url_for('artist_short_term') }}">Short Term</a>
+                </li>
 				<li number ="5">Order</li>
 				<li number ="6">Limit</li>
 				<li number ="7">Config</li>

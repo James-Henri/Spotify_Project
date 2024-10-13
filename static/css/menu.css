@@ -32,6 +32,67 @@ a{
     height: 630px;
 }
 
+/* FOR SELECT MENU ARROW */
+
+.select_arrow {
+    width: 58px; 
+    height: auto;
+    margin-right: 10px;
+	margin-top: 9px;
+    position: absolute;
+    left: -70px; /* Position it to the left of the text */
+    top: 50%; 
+    transform: translateY(-50%); 
+    display: none;
+}
+
+#select_menu li.active .select_arrow {
+    display: inline; /* Show arrow when active */
+}
+
+#select_menu li {
+    position: relative; /* Required for the absolute positioning of the arrow */
+}
+
+#select_menu li:hover .select_arrow {
+    display: inline; /* Always show arrow on hover */
+}
+
+#select_menu li.active .select_arrow {
+    display: inline; /* Arrow stays visible for the active item */
+}
+
+/* SELECT MENU SHADOW */
+
+.select_arrow_shadow {
+    width: 58px; 
+    height: 12px;
+	opacity: 0.5;
+	filter: brightness(0%);
+    margin-right: 8px;
+	margin-top: 32px;
+    position: absolute;
+    left: -70px;
+    top: 50%; 
+    transform: translateY(-50%); 
+    display: none;
+}
+
+#select_menu li.active .select_arrow_shadow {
+    display: inline; 
+}
+
+#select_menu li:hover .select_arrow_shadow {
+    display: inline; 
+}
+
+#select_menu li.active .select_arrow_shadow {
+    display: inline; 
+}
+
+
+/* OPTION MENU BOX*/
+
 #aside{
 	position: absolute;
     margin-left: 545px;
@@ -52,6 +113,8 @@ a{
     font-size: 29px;
     color: white;    	  
 }
+
+/* CHARACTER SCREEN */
 
 #firstCharacter{
 	position: relative;
@@ -101,6 +164,8 @@ a{
     text-align: left;
 }
 
+/* HP STATS */
+
 .hp_stats{
     font-size: 32px;
     color:cyan;
@@ -137,6 +202,8 @@ a{
 	background: rgb(53, 2, 2);
 	z-index: 1;
 }
+
+/* MP STATS */
 
 .mp_stats{
     font-size: 32px;
@@ -175,6 +242,8 @@ a{
 	z-index: 1;
 }
 
+/* NEXT LEVEL BAR */
+
 .next_level_text{
     font-size: 29px;
     top: 0px;
@@ -208,6 +277,8 @@ a{
 	z-index: 1;
 }
 
+/* LIMIT LEVEL BAR */
+
 .limit_level_text{
     font-size: 29px;
     top: 40px;
@@ -233,6 +304,8 @@ a{
 	z-index: 1;
 }
 
+/* BOTTOM TWO BOXES IN MENU */
+
 .current_time{
     position:absolute;
     list-style: none;
@@ -244,6 +317,9 @@ a{
 	border: 5px solid;
     border-radius: 15px;
     box-sizing: border-box;
+	text-align: left;
+	padding-left: 10px;
+	padding-top: 10px;
 }
 
 .cur_page{
