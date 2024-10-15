@@ -17,10 +17,12 @@ def configure():    # configure will get the secret API Keys
 @app.route("/", methods = ['GET', 'POST'])
 def main_menu():
     configure()         # must call configure in main section to make sure we can retrieve secret key
+
     if request.method == "POST":    # will be invoked when user clicks the spotify login button
         sp_oauth = create_spotify_oauth()
         auth_url = sp_oauth.get_authorize_url()
         return redirect(auth_url)
+    
     return render_template("main.html") # main page layout
 
 @app.route("/response", methods = ['GET', 'POST'])  # after loggin in, while be redirected to response
@@ -74,6 +76,11 @@ def render_top_artists(time_range): #helper function for long_term, medium_term,
     previous_page = page - 1 if page > 1 else None
 
     return render_template("menu.html", artists=artists, next_page=next_page, previous_page=previous_page, page=page, time_range=time_range)
+
+@app.route("/logout")
+def logout():
+    session.clear()  # Clear session to log out the user
+    return redirect("/")  # Redirect to the main page or login
 
 def get_token():
     token_info = session.get(TOKEN_INFO, None)
