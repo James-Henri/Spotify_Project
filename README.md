@@ -1,4 +1,4 @@
-#Final Spotify Fantasy Project
+# Final Spotify Fantasy Project
 
 ## A fun personal project utilizing Python, Flask, and Spotify API to give the user some cool feedback about their listening tendencies!
 
@@ -14,5 +14,9 @@ py -m pip install flask
 py -m pip install spotipy
 ```
 
-3. Make a .env file in the root directory
+3. Create a .env file in the root directory
 4. Go to [Spotify for Developers](https://developer.spotify.com/)
+5. Create or login to an account
+6. Create an app
+7. Once created, make sure the Redirect URI is set to, http://127.0.0.1:5000/response
+8. 
