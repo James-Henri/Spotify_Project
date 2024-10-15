@@ -1,15 +1,26 @@
 from flask import Flask, render_template, request, url_for, session, redirect
 from dotenv import load_dotenv
 import os
-import spotipy
+from spotipy import Spotify
 from spotipy.oauth2 import SpotifyOAuth
+from spotipy.cache_handler import FlaskSessionCacheHandler
 import time
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = os.getenv("flask_secret")
 
-app.secret_key = "PleaseChange"
-app.config['SESSION_COOKIE_NAME'] = 'Users Cookie'
-TOKEN_INFO = "token_info"
+cache_handler = FlaskSessionCacheHandler(session)
+
+sp_oauth =  SpotifyOAuth(
+    client_id="266db9561eef4aeda001535943a08fc0",   #client id and secret from Spotify Developers
+    client_secret= os.getenv("api_secret"),
+    redirect_uri="http://127.0.0.1:5000/response",   #where to redirect to after authorization
+    scope="user-top-read",   #what information we will be retrieving
+    cache_handler = cache_handler,
+    show_dialog=True
+)
+
+sp = Spotify(auth_manager=sp_oauth)
 
 def configure():    # configure will get the secret API Keys
     load_dotenv()
@@ -19,19 +30,18 @@ def main_menu():
     configure()         # must call configure in main section to make sure we can retrieve secret key
 
     if request.method == "POST":    # will be invoked when user clicks the spotify login button
-        sp_oauth = create_spotify_oauth()
-        auth_url = sp_oauth.get_authorize_url()
-        return redirect(auth_url)
+
+        if not sp_oauth.validate_token(cache_handler.get_cached_token()):
+            auth_url = sp_oauth.get_authorize_url()
+            return redirect(auth_url)
+        else:
+            return redirect(url_for("/response"))
     
     return render_template("main.html") # main page layout
 
 @app.route("/response", methods = ['GET', 'POST'])  # after loggin in, while be redirected to response
 def response():
-    sp_oauth = create_spotify_oauth()   # needed to 
-    session.clear()     # clearing to ensure that any previous data related to the session is removed before setting new data
-    code = request.args.get("code")     # After user logs into spotify, spotify gives us a special code that will be used to to exchange for an access token
-    token_info = sp_oauth.get_access_token(code)    # exchanging the code for the access token   
-    session[TOKEN_INFO] = token_info    # storing the access token into memory
+    sp_oauth.get_access_token(request.args['code'])
     return redirect("/artist_long_term")
 
 @app.route("/artist_long_term")
@@ -47,13 +57,10 @@ def artist_short_term():
     return render_top_artists('short_term')
 
 def render_top_artists(time_range): #helper function for long_term, medium_term, short_term
-    try:
-        token_info = get_token()  # Check if the user is logged in
-    except:
-        print("User not logged in")
-        return redirect("/")
-
-    sp = spotipy.Spotify(auth=token_info['access_token'])  # Authenticate with Spotify API
+    
+    if not sp_oauth.validate_token(cache_handler.get_cached_token()):
+            auth_url = sp_oauth.get_authorize_url()
+            return redirect(auth_url)
 
     all_artists = sp.current_user_top_artists(limit=20, time_range=time_range)['items']
 
@@ -82,22 +89,3 @@ def logout():
     session.clear()  # Clear session to log out the user
     return redirect("/")  # Redirect to the main page or login
 
-def get_token():
-    token_info = session.get(TOKEN_INFO, None)
-    if not token_info:
-        raise "exception"
-    now = int(time.time())
-    expired = token_info["expires_at"] - now < 60
-
-    if(expired):
-        sp_oauth = create_spotify_oauth()
-        token_info = sp_oauth.refresh_access_token(token_info['refresh_token'])
-    return token_info
-
-def create_spotify_oauth():
-    return SpotifyOAuth(
-        client_id="266db9561eef4aeda001535943a08fc0",   #client id and secret from Spotify Developers
-        client_secret= os.getenv("api_secret"),
-        redirect_uri=url_for('response', _external=True),   #where to redirect to after authorization
-        scope="user-top-read"   #what information we will be retrieving
-    )
