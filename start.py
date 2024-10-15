@@ -35,7 +35,7 @@ def main_menu():
             auth_url = sp_oauth.get_authorize_url()
             return redirect(auth_url)
         else:
-            return redirect(url_for("/response"))
+            return redirect("/artist_long_term")
     
     return render_template("main.html") # main page layout
 
